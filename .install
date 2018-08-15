@@ -1,2 +1,1 @@
 #!/bin/bash
-lxc launch ubuntu:bionic job$JOB_NUMBER

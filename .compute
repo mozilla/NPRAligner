@@ -1,3 +1,4 @@
 #!/bin/bash
+lxc launch ubuntu:bionic job$JOB_NUMBER
 lxc stop $JOB_NUMBER
 lxc delete $JOB_NUMBER
