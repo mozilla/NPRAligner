@@ -1,2 +1,3 @@
 #!/bin/bash
-printenv
+lxc stop $JOB_NUMBER
+lxc delete $JOB_NUMBER
