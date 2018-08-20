@@ -1,4 +1,6 @@
 #!/bin/bash
-lxc launch ubuntu:bionic job$JOB_NUMBER
+lxc start job$JOB_NUMBER
+# Do stuff...
+lxc config device remove job$JOB_NUMBER disk_mount
 lxc stop job$JOB_NUMBER
 lxc delete job$JOB_NUMBER
