@@ -1,5 +1,6 @@
 #!/bin/bash
-lxc start job$JOB_NUMBER
+lxc launch ubuntu:bionic job$JOB_NUMBER
+lxc config device add job$JOB_NUMBER disk_mount disk source=/snakepit path=snakepit
 # Do stuff...
 lxc config device remove job$JOB_NUMBER disk_mount
 lxc stop job$JOB_NUMBER
