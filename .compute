@@ -2,8 +2,11 @@
 lxc init ubuntu:bionic job$JOB_NUMBER
 printf "uid 1777 1000\ngid 1777 1000" | lxc config set job$JOB_NUMBER raw.idmap -
 lxc config device add job$JOB_NUMBER sda disk source=/snakepit path=snakepit
+lxc file push gentle_install.sh test/root/
+lxc file push gentle_run.sh test/root/
 lxc start job$JOB_NUMBER
-# Do stuff...
+# Start igentle install
+# Start gentle running
 lxc stop job$JOB_NUMBER
 lxc config device remove job$JOB_NUMBER sda
 lxc delete job$JOB_NUMBER
