@@ -1,8 +1,9 @@
 #!/bin/bash
 lxc init ubuntu:bionic job$JOB_NUMBER
-lxc start job$JOB_NUMBER
+printf "uid 1777 1000\ngid 1777 1000" | lxc config set job$JOB_NUMBER raw.idmap -
 lxc config device add job$JOB_NUMBER sda disk source=/snakepit path=snakepit
+lxc start job$JOB_NUMBER
 # Do stuff...
-lxc config device remove job$JOB_NUMBER sda
 lxc stop job$JOB_NUMBER
+lxc config device remove job$JOB_NUMBER sda
 lxc delete job$JOB_NUMBER
