@@ -6,7 +6,6 @@ lxc file push gentle_install.sh job$JOB_NUMBER/root/
 lxc file push gentle_run.sh job$JOB_NUMBER/root/
 lxc start job$JOB_NUMBER
 # Start igentle install
-# Start gentle running
 lxc stop job$JOB_NUMBER
 lxc config device remove job$JOB_NUMBER sda
 lxc delete job$JOB_NUMBER
