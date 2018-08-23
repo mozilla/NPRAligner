@@ -1,4 +1,6 @@
 #!/bin/bash
+export HTTP_PROXY=$http_proxy
+export HTTPS_PROXY=$https_proxy
 lxc init ubuntu:bionic job$JOB_NUMBER
 printf "uid 1777 1000\ngid 1777 1000" | lxc config set job$JOB_NUMBER raw.idmap -
 lxc config device add job$JOB_NUMBER sda disk source=/snakepit path=snakepit
