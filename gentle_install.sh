@@ -12,3 +12,4 @@ cd ..
 git clone https://github.com/kdavis-mozilla/gentle.git
 cd gentle
 ./install.sh
+python3 setup.py install
