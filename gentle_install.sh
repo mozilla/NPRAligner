@@ -1,6 +1,6 @@
 #!/bin/bash
-apt-get install python
-apt-get install gfortran
+apt-get -y install python
+apt-get -y install gfortran
 git clone https://github.com/kdavis-mozilla/openfst.git
 cd openfst
 ./configure
