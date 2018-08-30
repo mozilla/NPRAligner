@@ -2,9 +2,10 @@
 lxc init headnode:gentle job$JOB_NUMBER
 printf "uid 1777 0\ngid 1777 0" | lxc config set job$JOB_NUMBER raw.idmap -
 lxc config device add job$JOB_NUMBER sda disk source=/snakepit path=snakepit
-lxc file push gentle_run.sh job$JOB_NUMBER/root/
+lxc file push gentle_run.sh job$JOB_NUMBER/root/gentle
+lxc file push gentle_run_impl.py job$JOB_NUMBER/root/gentle
 lxc start job$JOB_NUMBER
-lxc exec job$JOB_NUMBER /root/gentle_run.sh
+lxc exec job$JOB_NUMBER /root/gentle/gentle_run.sh
 lxc stop job$JOB_NUMBER
 lxc config device remove job$JOB_NUMBER sda
 lxc delete job$JOB_NUMBER
