@@ -11,7 +11,7 @@ disfluencies = set(['uh', 'um'])
 
 nthreads = multiprocessing.cpu_count()
 
-source_glob_suffix = '**/*.xml'
+source_glob_suffix = '*/raw/transcripts/extracted/*/*/*.xml'
 source_glob_prefix = '/snakepit/shared/data/NPR/WAMU'
 
 target_prefix = '/snakepit/uploads/NPR/WAMU'
@@ -30,18 +30,18 @@ for source_path_xml in glob.glob(glob_path, recursive=True):
     target_path_txt = os.path.join(target_prefix, os.path.relpath(source_path_xml, source_glob_prefix)).replace('.xml', '.txt')
     pathlib.Path(os.path.dirname(target_path_txt)).mkdir(parents=True, exist_ok=True)
     with open(target_path_txt, 'w+') as target_file_txt:
-        parsed_transcript = ET.parse(source_path_xml)
-        parsed_root = parsed_transcript.getroot()
+        parsed_source_xml = ET.parse(source_path_xml)
+        parsed_root = parsed_source_xml.getroot()
         for turn in parsed_root.findall('.//vx:Turn', namespaces):
             if 'DISCLAIMER' != turn.attrib['Speaker']:
                 for fragment in turn.findall('.//vx:Fragment', namespaces):
                     target_file_txt.write(fragment.text)
- 
+
     with open(target_path_txt) as target_file_txt:
         transcript = target_file_txt.read()
- 
+
     source_path_mp3 = source_path_xml.replace('transcripts/extracted', 'audio').replace('.xml', '.mp3')
-    if os.path.isfile(source_path_mp3):
+    if os.path.isfile(source_path_mp3) and transcript:
         target_path_json = target_path_txt.replace('.txt', '.json')
         with open(target_path_json, 'w') as target_file_json:
             print('converting audio to 8K sampled wav')
