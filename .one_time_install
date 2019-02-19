@@ -1,8 +1,0 @@
-#!/bin/bash
-lxc init ubuntu:bionic job$JOB_NUMBER
-lxc file push gentle_install.sh job$JOB_NUMBER/root/
-lxc start job$JOB_NUMBER
-lxc exec job$JOB_NUMBER /root/gentle_install.sh
-lxc stop job$JOB_NUMBER
-lxc publish job$JOB_NUMBER --alias gentle
-lxc delete job$JOB_NUMBER
